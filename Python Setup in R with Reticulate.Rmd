@@ -1,0 +1,73 @@
+---
+title: "Python Setup in R with Reticulate"
+author: "Aditya Mathur"
+date: "25/04/2021"
+output: html_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE,
+                      message = FALSE,
+                      warning = FALSE
+)
+```
+# Step 1 - Reticulate Setup
+Fire up an R Markdown document and load tidyverse and reticulate:
+
+1. tidyverse - Loads the core data wrangling and visualization packages needed to work in R.
+2. reticulate - The key link between R and Python.
+
+```{r}
+library(tidyverse)
+library(reticulate)
+
+```
+#Step 2 - Conda Installation
+Next, we need to make sure we have the Python Environment setup that we want to use. For Python Environments, we will use Anaconda (Conda), a python environment management tool specifically developed for data scientists.
+
+Download Conda
+
+* Anaconda Distribution - [Installation Instructions](https://docs.anaconda.com/anaconda/install/)
+Create a New Python Environment
+
+Run the following code in your terminal:
+
+conda create -n py3.8 python=3.8 scikit-learn pandas numpy matplotlib
+
+his code does the following:
+
+1. Creates a new Python environment called “py3.8”
+2. Installs python version 3.8
+3. Installs the latest versions of scikit-learn, pandas, numpy, and matplotlib.
+In the future you can always add more python packages (you can toggle between environments using conda activate and conda deactivate commands)
+
+Conda Terminal Commands
+At some point you will need to create, modify, add more packages to your Conda Environment(s). Here are 4 useful commands:
+
+Run conda env list to list the available conda environments
+Run conda activate <env_name> to activate a conda environment
+Run conda update --all to update all python packages in a conda environment.
+Run conda install <package_name> to install a new package
+
+List your Conda Environments (in the Terminal)
+Use conda list env to list your Conda Environments in the Terminal.
+If you see py3.8, you are good to go.
+
+# List your Conda Enviromnents (in R Markdown)
+Back in R Markdown, we can do the same thing using retculate::conda_list()
+
+```{r}
+reticulate::conda_list()
+```
+Set Your Conda Environment (in R Markdown)
+Make sure your R Markdown document activates the “py3.8” environment using use_condaenv().
+```{r}
+# Replace this with your conda environment containing sklearn, pandas, & numpy
+use_condaenv("py3.8", required = TRUE)
+```
+Double check that reticulate is actually using your new conda env.
+
+```{r}
+reticulate::py_config()
+```
+
