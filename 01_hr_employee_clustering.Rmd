@@ -36,6 +36,7 @@ library(reticulate)
 
 # Replace this with your conda environment containing sklearn, pandas, & numpy
 use_condaenv("py3.8", required = TRUE)
+py_config()
 ```
 
 
